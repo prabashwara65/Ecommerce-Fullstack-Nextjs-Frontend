@@ -1,43 +1,3 @@
-// import { createContext, useEffect, useState } from "react";
-
-// export const CartContext = createContext({});
-
-// export function CartContextProvider({ children }) {
-//   const ls = typeof window !== "undefined" ? window.localStorage : null;
-//   const initialCart = ls && ls.getItem("cart") ? JSON.parse(ls.getItem("cart")) : [];
-//   const [cartProducts, setCartProducts] = useState(initialCart);
-
-//   useEffect(() => {
-//     if (cartProducts.length > 0) {
-//       ls?.setItem("cart", JSON.stringify(cartProducts));
-//     }
-//   }, [cartProducts, ls]);
-
-//   useEffect(() => {
-//     if (ls && ls.getItem("cart")) {
-//       setCartProducts(JSON.parse(ls.getItem("cart")));
-//     }
-//   }, [ls]);
-
-//   function addProduct(productId) {
-//     setCartProducts(prev => [...prev, productId]);
-//   }
-
-
-
-//   function clearCart() {
-//     setCartProducts([]);
-//   }
-
-//   return (
-//     <CartContext.Provider
-//       value={{ cartProducts, setCartProducts, addProduct, removeProduct, clearCart }}
-//     >
-//       {children}
-//     </CartContext.Provider>
-//   );
-// }
-
 
 import { createContext, useEffect, useState } from "react";
 
@@ -86,10 +46,13 @@ export function CartContextProvider({ children }) {
     });
   }
 
-  // Other functions (removeProduct, clearCart) omitted for brevity
+  function clearCart() {
+    setCartProducts([]);
+  }
+
 
   return (
-    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct ,removeProduct }}>
+    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct ,removeProduct, clearCart }}>
       {children}
     </CartContext.Provider>
   );
