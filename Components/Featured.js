@@ -57,10 +57,10 @@ const ButtonsWrapper = styled.div`
 `;
 
 export default function Featured({product}) {
-  const {addProduct} = useContext(CartContext);
+  const { addProduct } = useContext(CartContext);
   function addFeaturedToCart() {
     addProduct(product._id);
-    //setCartProducts(prev => [...prev,product._id])
+    //setCartProducts((prev) => [...prev,product._id]);
 
   }
   return (
