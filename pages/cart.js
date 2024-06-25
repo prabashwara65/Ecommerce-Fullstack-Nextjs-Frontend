@@ -10,6 +10,7 @@ import Input from "@/Components/Input";
 
 
 
+
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -103,15 +104,15 @@ export default function CartPage() {
   function lessOfThisProduct(id) {
     removeProduct(id);
   }
-//   async function goToPayment() {
-//     const response = await axios.post('/api/checkout', {
-//       name,email,city,postalCode,streetAddress,country,
-//       cartProducts,
-//     });
-//     if (response.data.url) {
-//       window.location = response.data.url;
-//     }
-//   }
+  async function goToPayment() {
+    const response = await axios.post('/api/checkout', {
+      name,email,city,postalCode,streetAddress,country,
+      cartProducts,
+    });
+    if (response.data.url) {
+      window.location = response.data.url;
+    }
+  }
   let total = 0;
   for (const productId of cartProducts) {
     const price = products.find(p => p._id === productId)?.price || 0;
@@ -220,7 +221,7 @@ export default function CartPage() {
                      name="country"
                      onChange={ev => setCountry(ev.target.value)}/>
               <Button black block
-                    //   onClick={goToPayment} 
+                       onClick={goToPayment} 
                       >
                 Continue to payment
               </Button>
