@@ -17,7 +17,7 @@ export function CartContextProvider({ children }) {
   useEffect(() => {
     // Save cart to localStorage whenever cartProducts change
     if (ls) {
-      ls.setItem("cart", JSON.stringify(cartProducts));
+      ls.setItem("cart");
     }
   }, [cartProducts, ls]);
 
