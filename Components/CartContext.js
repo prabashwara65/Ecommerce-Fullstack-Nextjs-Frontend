@@ -32,8 +32,7 @@ export function CartContextProvider({ children }) {
 
   function removeProduct(productId) {
     setCartProducts(prev => {
-      if (!prev) {
-        return [];
+      
       }
       const pos = prev.indexOf(productId);
       if (pos !== -1) {
