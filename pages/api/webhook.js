@@ -7,14 +7,14 @@ const endpointSecret = "whsec_220f2ed2b8c0d097443614fe77d57ae64ae329689ab2e1a71d
 
 export default async function handler(req,res) {
   await mongooseConenct();
-  const sig = req.headers['stripe-signature'];
+  
 
   let event;
 
   try {
     event = stripe.webhooks.constructEvent(await buffer(req), sig, endpointSecret);
   } catch (err) {
-    res.status(400).send(`Webhook Error: ${err.message}`);
+    res.status(400));
     return;
   }
 
@@ -26,7 +26,7 @@ export default async function handler(req,res) {
       const paid = data.payment_status === 'paid';
       if (orderId && paid) {
         await Order.findByIdAndUpdate(orderId,{
-          paid:true,
+     
         })
       }
       break;
