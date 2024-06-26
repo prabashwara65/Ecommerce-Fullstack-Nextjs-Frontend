@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import styled from 'styled-components';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Center from './Center';
 import { CartContext } from './CartContext';
+import BarsIcon from './icons/Bars';
 
 const StyledHeader = styled.header`
     background-color: #222;
@@ -12,6 +13,8 @@ const StyledHeader = styled.header`
 const Logo = styled.a`
     color: #fff;
     text-decoration: none;
+    position: relative;
+    z-index: 3;
 `;
 
 const Wrapper = styled.div`
@@ -51,8 +54,23 @@ const NavLink = styled(Link)`
     }
 `;
 
+const NavButton = styled.button`
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    border:0;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+`;
+
 const Header = () => {
     const { cartProducts } = useContext(CartContext);
+    const [mobileNavActive,setMobileNavActive] = useState(false);
 
     // Defaulting cartProducts to an empty array if undefined
     const productsCount = cartProducts ? cartProducts.length : 0;
@@ -62,13 +80,16 @@ const Header = () => {
             <Center>
                 <Wrapper>
                     <Logo href={'/'}>Ecommerce</Logo>
-                    <StyledNav>
+                    <StyledNav mobileNavActive={mobileNavActive}>
                         <NavLink href={'/'}> Home</NavLink>
                         <NavLink href={'/products'}> All Products</NavLink>
                         <NavLink href={'/categories'}> Categories</NavLink>
                         <NavLink href={'/account'}> Account</NavLink>
                         <NavLink href={'/cart'}> Cart ({productsCount})</NavLink>
                     </StyledNav>
+                    <NavButton onClick={() => setMobileNavActive(prev => !prev)}>
+                        <BarsIcon />
+                    </NavButton>
                 </Wrapper>
             </Center>
         </StyledHeader>
