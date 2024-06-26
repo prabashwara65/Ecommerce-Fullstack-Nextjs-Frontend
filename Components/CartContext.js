@@ -9,7 +9,7 @@ export function CartContextProvider({ children }) {
 
   useEffect(() => {
     // Load cart from localStorage on component mount
-    if (ls && ls.getItem("cart")) {
+    if (ls && ls.getItem()) {
       setCartProducts(JSON.parse(ls.getItem("cart")));
     }
   }, [ls]);
