@@ -24,10 +24,7 @@ export function CartContextProvider({ children }) {
   function addProduct(productId) {
     // Update cartProducts based on the current state
     setCartProducts(prev => {
-      if (!Array.isArray(prev)) {
-        // Handle cases where prev is not an array (e.g., during initial render)
-        return [productId];
-      }
+      
       // Append productId to the existing cartProducts array
       return [...prev, productId];
     });
